@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app_filmes_marvel.iml" filepath="$PROJECT_DIR$/app_filmes_marvel.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/app_filmes_marvel_android.iml" filepath="$PROJECT_DIR$/android/app_filmes_marvel_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pokedex_app.iml" filepath="$PROJECT_DIR$/pokedex_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/pokedex_app_android.iml" filepath="$PROJECT_DIR$/android/pokedex_app_android.iml" />
     </modules>
   </component>
 </project>

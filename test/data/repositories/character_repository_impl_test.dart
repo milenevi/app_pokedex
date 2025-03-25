@@ -1,8 +1,8 @@
-import 'package:app_filmes_marvel/core/error/failures.dart';
-import 'package:app_filmes_marvel/data/datasources/pokemon_api_datasource.dart';
-import 'package:app_filmes_marvel/data/models/character_model.dart';
-import 'package:app_filmes_marvel/data/repositories/character_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pokedex_app/core/error/failures.dart';
+import 'package:pokedex_app/data/datasources/pokemon_api_datasource.dart';
+import 'package:pokedex_app/data/models/character_model.dart';
+import 'package:pokedex_app/data/repositories/character_repository_impl.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockPokemonApiDatasource extends Mock implements PokemonApiDatasource {}

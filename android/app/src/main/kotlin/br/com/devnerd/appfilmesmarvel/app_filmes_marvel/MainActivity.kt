@@ -1,4 +1,4 @@
-package br.com.devnerd.appfilmesmarvel.app_filmes_marvel
+package br.com.devnerd.pokedex.pokedex_app
 
 import io.flutter.embedding.android.FlutterActivity
 

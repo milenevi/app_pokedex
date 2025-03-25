@@ -1,114 +1,86 @@
-# App Filmes Marvel
+# Pokedex App
 
-Aplicativo em Flutter para listagem e visualização de detalhes de personagens da Marvel, utilizando a API Marvel.
+Um aplicativo Flutter que exibe uma coleção de Pokémon usando a PokeAPI.
 
-## Descrição
+## Funcionalidades
 
-Este aplicativo exibe uma lista de personagens da Marvel, com a possibilidade de visualizar detalhes de cada personagem, como biografia e quadrinhos relacionados.
-
-## Estrutura do Projeto
-
-O projeto foi desenvolvido seguindo os princípios da Clean Architecture:
-
-- **Core**: Componentes centrais como configurações de API, erro e utilitários.
-- **Data**: Implementações de repositórios e fontes de dados.
-- **Domain**: Entidades, interfaces de repositórios e casos de uso.
-- **Presentation**: Interface do usuário (pages, widgets) e gerenciamento de estado.
+- Lista de Pokémon com paginação infinita
+- Busca de Pokémon por nome
+- Detalhes do Pokémon
+- Interface moderna e responsiva
+- Gerenciamento de estado com MobX
+- Arquitetura limpa (Clean Architecture)
 
 ## Tecnologias Utilizadas
 
-- **Flutter**: SDK de desenvolvimento de aplicativos multiplataforma.
-- **MobX**: Para gerenciamento de estado reativo.
-- **Flutter Modular**: Para injeção de dependências e gerenciamento de rotas.
-- **Dio**: Cliente HTTP para comunicação com a API.
-- **Clean Architecture**: Para separação de responsabilidades e testabilidade.
+- Flutter
+- MobX para gerenciamento de estado
+- Modular para injeção de dependência
+- PokeAPI para dados dos Pokémon
+- Clean Architecture
 
-## Instalação
+## Estrutura do Projeto
 
-1. Clone o repositório:
-
-```
-git clone https://github.com/seu-usuario/app_filmes_marvel.git
-cd app_filmes_marvel
-```
-
-2. Instale as dependências:
-
-```
-flutter pub get
-```
-
-3. Execute o build runner para gerar os arquivos MobX:
-
-```
-flutter pub run build_runner build --delete-conflicting-outputs
-```
-
-4. Execute o aplicativo:
-
-```
-flutter run
-```
-
-## Configuração da API
-
-Este aplicativo utiliza o Firebase Remote Config para armazenar as chaves da API Marvel de forma segura. Para configurar:
-
-1. Crie uma conta em [developer.marvel.com](https://developer.marvel.com/)
-2. Obtenha sua chave pública e privada em [developer.marvel.com/account](https://developer.marvel.com/account)
-3. Configure um projeto no [Firebase Console](https://console.firebase.google.com/)
-4. Adicione um app Android com o pacote `br.com.devnerd.appfilmesmarvel.app_filmes_marvel`
-5. Baixe o arquivo `google-services.json` e coloque-o na pasta `android/app/` do projeto
-6. No Firebase Console, vá para Remote Config e adicione os seguintes parâmetros:
-   - `marvel_public_key`: sua chave pública da API Marvel
-   - `marvel_private_key`: sua chave privada da API Marvel
-7. Publique as alterações
-
-Para desenvolvimento, você também pode editar os valores padrão em `lib/core/util/api_config.dart`:
-
-```dart
-await remoteConfig.setDefaults({
-  'marvel_public_key': 'YOUR_PUBLIC_KEY',
-  'marvel_private_key': 'YOUR_PRIVATE_KEY',
-});
-```
-
-Substitua `YOUR_PUBLIC_KEY` e `YOUR_PRIVATE_KEY` pelas suas chaves para testes locais.
-
-## Recursos
-
-- Listagem de personagens Marvel
-- Rolagem infinita para carregar mais personagens
-- Detalhes do personagem, incluindo biografia e quadrinhos
-- Tratamento de erros de API e conexão
-
-## Estrutura de Arquivos
+O projeto segue os princípios da Clean Architecture:
 
 ```
 lib/
-  ├── core/                   # Componentes centrais
-  │   ├── di/                 # Injeção de dependências
-  │   ├── error/              # Classes de erro
-  │   └── util/               # Utilitários
-  ├── data/                   # Camada de dados
-  │   ├── datasources/        # Fontes de dados
-  │   ├── models/             # Modelos de dados
-  │   └── repositories/       # Implementações de repositórios
-  ├── domain/                 # Camada de domínio
-  │   ├── entities/           # Entidades
-  │   ├── repositories/       # Interfaces de repositórios
-  │   └── usecases/           # Casos de uso
-  └── presentation/           # Camada de apresentação
-      ├── controllers/        # Controladores MobX
-      ├── pages/              # Páginas da aplicação
-      └── widgets/            # Widgets reutilizáveis
+├── core/
+│   ├── di/          # Injeção de dependência
+│   ├── error/       # Tratamento de erros
+│   └── usecases/    # Casos de uso base
+├── data/
+│   ├── datasources/ # Fontes de dados (API, local)
+│   ├── models/      # Modelos de dados
+│   └── repositories/# Implementações dos repositórios
+├── domain/
+│   ├── entities/    # Entidades do domínio
+│   ├── repositories/# Interfaces dos repositórios
+│   └── usecases/    # Casos de uso específicos
+└── presentation/
+    ├── controllers/ # Controladores (MobX stores)
+    ├── pages/       # Telas do aplicativo
+    └── widgets/     # Widgets reutilizáveis
 ```
 
-## Versões Utilizadas
+## Configuração do Ambiente
 
-- Flutter: 3.19.3
-- Dart: 3.3.1
-- dio: 5.4.2
-- flutter_modular: 6.3.2
-- mobx: 2.3.0+1
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/pokedex-app.git
+cd pokedex-app
+```
+
+2. Instale as dependências:
+```bash
+flutter pub get
+```
+
+3. Execute o aplicativo:
+```bash
+flutter run
+```
+
+## Configuração do Projeto
+
+1. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+```env
+POKEAPI_BASE_URL=https://pokeapi.co/api/v2
+```
+
+## Estrutura de Commits
+
+Este projeto segue o padrão de commits do Conventional Commits:
+
+- `feat`: Nova funcionalidade
+- `fix`: Correção de bug
+- `docs`: Alterações na documentação
+- `style`: Alterações de estilo (formatação, espaços, etc)
+- `refactor`: Refatoração de código
+- `test`: Adição ou correção de testes
+- `chore`: Atualizações de build, configurações, etc
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 - flutter_mobx: 2.2.0+2

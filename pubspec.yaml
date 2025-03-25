@@ -1,5 +1,5 @@
-name: app_filmes_marvel
-description: "A new Flutter project."
+name: pokedex_app
+description: Um aplicativo Flutter que exibe uma coleção de Pokémon usando a PokeAPI.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

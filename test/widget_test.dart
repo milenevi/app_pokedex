@@ -8,8 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:app_filmes_marvel/core/di/app_module.dart';
-import 'package:app_filmes_marvel/main.dart';
+import 'package:pokedex_app/core/di/app_module.dart';
+import 'package:pokedex_app/main.dart';
 
 void main() {
   testWidgets('Placeholder test', (WidgetTester tester) async {
