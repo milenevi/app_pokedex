@@ -4,6 +4,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../controllers/characters_controller.dart';
 import '../widgets/character_card.dart';
 import '../widgets/error_view.dart';
+import '../widgets/search_field.dart';
+import '../widgets/characters_app_bar.dart';
+import '../widgets/characters_title_section.dart';
+import '../widgets/no_results_found.dart';
 
 class CharactersPage extends StatefulWidget {
   const CharactersPage({Key? key}) : super(key: key);
@@ -20,7 +24,6 @@ class _CharactersPageState extends State<CharactersPage> {
   @override
   void initState() {
     super.initState();
-    print('CharactersPage - initState');
     controller.loadCharacters();
     _scrollController.addListener(_scrollListener);
   }
@@ -37,7 +40,6 @@ class _CharactersPageState extends State<CharactersPage> {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent - 200 &&
         !_scrollController.position.outOfRange) {
-      print('CharactersPage - Carregando mais pokémons');
       controller.loadCharacters();
     }
   }
@@ -46,38 +48,16 @@ class _CharactersPageState extends State<CharactersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.network(
-              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png',
-              height: 30,
-              width: 30,
-            ),
-            const SizedBox(width: 8),
-            const Text(
-              'POKÉDEX',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.5,
-              ),
-            ),
-          ],
-        ),
-        centerTitle: true,
-      ),
+      appBar: const CharactersAppBar(),
       body: RefreshIndicator(
         onRefresh: () => controller.loadCharacters(refresh: true),
         color: Colors.black,
         child: Column(
           children: [
-            // Campo de pesquisa fixo no topo
-            _buildSearchField(),
-
-            // Conteúdo principal
+            SearchField(
+              controller: _searchController,
+              onChanged: controller.setSearchQuery,
+            ),
             Expanded(
               child: Observer(
                 builder: (_) {
@@ -97,50 +77,15 @@ class _CharactersPageState extends State<CharactersPage> {
 
                   return Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 16.0,
-                        ),
-                        child: Observer(
-                          builder:
-                              (_) => Text(
-                                controller.searchQuery.isNotEmpty
-                                    ? 'RESULTADOS PARA "${controller.searchQuery.toUpperCase()}"'
-                                    : 'POKÉMON COLLECTION',
-                                style: const TextStyle(
-                                  color: Color(0xFF303943),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.0,
-                                ),
-                              ),
-                        ),
+                      CharactersTitleSection(
+                        searchQuery: controller.searchQuery,
                       ),
                       Expanded(
                         child:
                             controller.characters.isEmpty &&
                                     controller.searchQuery.isNotEmpty
-                                ? Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.search_off,
-                                        size: 80,
-                                        color: Colors.grey[400],
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Text(
-                                        'Nenhum Pokémon encontrado para "${controller.searchQuery}"',
-                                        style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: 16,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
+                                ? NoResultsFound(
+                                  searchQuery: controller.searchQuery,
                                 )
                                 : GridView.builder(
                                   controller: _scrollController,
@@ -201,49 +146,6 @@ class _CharactersPageState extends State<CharactersPage> {
                         ),
                     ],
                   );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSearchField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: const Color(0xFFF6F6F6),
-          border: const Border(
-            bottom: BorderSide(color: Colors.black, width: 1.0),
-          ),
-        ),
-        padding: const EdgeInsets.fromLTRB(20, 14, 20, 8),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(Icons.search, size: 26, color: Colors.black.withAlpha(153)),
-            const SizedBox(width: 12),
-            Expanded(
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search Pokémon',
-                  hintStyle: TextStyle(
-                    color: Colors.black.withAlpha(102),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  isDense: true,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.zero,
-                ),
-                style: const TextStyle(color: Colors.black87, fontSize: 16),
-                onChanged: (value) {
-                  controller.setSearchQuery(value);
                 },
               ),
             ),

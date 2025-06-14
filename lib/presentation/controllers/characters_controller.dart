@@ -50,14 +50,12 @@ abstract class _CharactersControllerBase with Store {
 
     if (!hasMoreData) return;
 
-    print('CarregandoPersonagens - offset: $currentOffset, limit: $limit');
     state = CharactersState.loading;
 
     final result = await getCharacters(offset: currentOffset, limit: limit);
 
     result.fold(
       (data) {
-        print('Personagens carregados com sucesso: ${data.length}');
         if (data.isEmpty) {
           hasMoreData = false;
         } else {
@@ -75,7 +73,6 @@ abstract class _CharactersControllerBase with Store {
         state = CharactersState.loaded;
       },
       (failure) {
-        print('Erro ao carregar personagens: ${failure.message}');
         errorMessage = failure.message;
         state = CharactersState.error;
       },

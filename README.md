@@ -79,8 +79,3 @@ Este projeto segue o padrão de commits do Conventional Commits:
 - `refactor`: Refatoração de código
 - `test`: Adição ou correção de testes
 - `chore`: Atualizações de build, configurações, etc
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-- flutter_mobx: 2.2.0+2

@@ -13,7 +13,7 @@ class NetworkFailure extends Failure {
 }
 
 class ApiKeyFailure extends Failure {
-  ApiKeyFailure() : super('Erro de autenticação com a API Marvel.');
+  ApiKeyFailure() : super('Erro de autenticação com a API.');
 }
 
 class UnexpectedFailure extends Failure {

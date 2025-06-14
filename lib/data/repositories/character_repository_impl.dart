@@ -38,4 +38,16 @@ class CharacterRepositoryImpl implements CharacterRepository {
       return Result.failure(UnexpectedFailure());
     }
   }
+
+  @override
+  Future<Result<List<Character>>> searchCharacters(String query) async {
+    try {
+      final characters = await datasource.searchCharacters(query);
+      return Result.success(characters);
+    } on Failure catch (failure) {
+      return Result.failure(failure);
+    } catch (e) {
+      return Result.failure(UnexpectedFailure());
+    }
+  }
 }

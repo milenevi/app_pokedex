@@ -13,7 +13,7 @@ class CharacterModel extends Character {
   });
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) {
-    // A PokéAPI não fornece descrições diretamente, então usamos o nome como descrição
+    // A PokéAPI não fornece descrições diretamente, então usei o nome como descrição
     final description = json['name'] ?? '';
 
     // Extrai as habilidades

@@ -5,7 +5,6 @@ import 'core/di/app_module.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inicializa o app com a tela de splash
   Modular.setInitialRoute('/splash');
 
   runApp(ModularApp(module: AppModule(), child: const PokemonApp()));

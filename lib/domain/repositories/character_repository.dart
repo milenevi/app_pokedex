@@ -7,4 +7,5 @@ abstract class CharacterRepository {
     int limit = 20,
   });
   Future<Result<Character>> getCharacterById(int id);
+  Future<Result<List<Character>>> searchCharacters(String query);
 }

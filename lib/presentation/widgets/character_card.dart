@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../domain/entities/character.dart';
+import 'pokemon_type_chip.dart';
 
 class CharacterCard extends StatelessWidget {
   final Character character;
@@ -20,7 +21,7 @@ class CharacterCard extends StatelessWidget {
             color: Colors.black,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withAlpha(77),
                 blurRadius: 6,
                 offset: const Offset(0, 3),
               ),
@@ -76,9 +77,9 @@ class CharacterCard extends StatelessWidget {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        Colors.black.withOpacity(0.9),
-                        Colors.black.withOpacity(0.6),
-                        Colors.black.withOpacity(0.0),
+                        Colors.black.withAlpha(230),
+                        Colors.black.withAlpha(179),
+                        Colors.black.withAlpha(0),
                       ],
                     ),
                   ),
@@ -115,22 +116,12 @@ class CharacterCard extends StatelessWidget {
                         children:
                             character.types
                                 .map(
-                                  (type) => Container(
+                                  (type) => PokemonTypeChip(
+                                    type: type,
+                                    fontSize: 9,
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 8,
                                       vertical: 2,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: _getTypeColor(type),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Text(
-                                      type.toUpperCase(),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 9,
-                                        fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                   ),
                                 )
@@ -145,49 +136,5 @@ class CharacterCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  // Retorna uma cor baseada no tipo do Pokémon
-  Color _getTypeColor(String type) {
-    switch (type.toLowerCase()) {
-      case 'fire':
-        return Colors.red;
-      case 'water':
-        return Colors.blue;
-      case 'grass':
-        return Colors.green;
-      case 'electric':
-        return Colors.yellow[700]!;
-      case 'psychic':
-        return Colors.purple;
-      case 'ice':
-        return Colors.lightBlue;
-      case 'dragon':
-        return Colors.indigo;
-      case 'dark':
-        return Colors.brown;
-      case 'fairy':
-        return Colors.pink;
-      case 'normal':
-        return Colors.grey[400]!;
-      case 'fighting':
-        return Colors.orange[800]!;
-      case 'flying':
-        return Colors.lightBlue[200]!;
-      case 'poison':
-        return Colors.purple[800]!;
-      case 'ground':
-        return Colors.brown[300]!;
-      case 'rock':
-        return Colors.brown;
-      case 'bug':
-        return Colors.lightGreen;
-      case 'ghost':
-        return Colors.deepPurple;
-      case 'steel':
-        return Colors.blueGrey;
-      default:
-        return Colors.grey;
-    }
   }
 }

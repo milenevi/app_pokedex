@@ -12,7 +12,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    // Navega para a tela principal após um pequeno delay
     Future.delayed(const Duration(seconds: 2), () {
       Modular.to.navigate('/');
     });
